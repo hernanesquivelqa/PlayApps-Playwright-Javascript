@@ -1,17 +1,20 @@
 {
-  "name": "playwright",
+  "name": "playapps-playwright-javascript",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write \"**/*.js\"",
+    "test": "playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Playwright tests for PlayApps",
   "devDependencies": {
     "@playwright/test": "^1.51.0",
-    "@types/node": "^22.13.10"
+    "prettier": "^3.5.3"
   },
   "dependencies": {
-    "playwright": "file:"
+    "playapps-playwright-javascript": "file:"
   }
 }

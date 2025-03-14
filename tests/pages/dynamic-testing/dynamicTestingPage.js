@@ -1,21 +1,22 @@
 class DynamicTestingPage {
-    constructor(driver) {
-        this.page = driver;
-        this.url = 'https://qaplayground.dev/apps/dynamic-table/';
-    }
+  constructor(driver) {
+    this.page = driver;
+    this.url = 'https://qaplayground.dev/apps/dynamic-table/';
+  }
 
-    // Localizadores como funciones para mayor flexibilidad
-    getSuperHeroTextLocator() {
-        return this.page.locator("text=SUPERHERO");
-    }
+  // Localizadores como funciones para mayor flexibilidad
+  getSuperHeroTextLocator() {
+    return this.page.locator('text=SUPERHERO');
+  }
 
-    getSpiderManRowLocator() {
-        return this.page.locator('text="Spider-Man" >> xpath=../../../..');
-    }
+  getSpiderManRowLocator() {
+    return this.page.locator('text="Spider-Man" >> xpath=../../../..');
+  }
 
-    getSpiderManRealNameCell() {
-        return this.getSpiderManRowLocator().locator("td").nth(2);
-    }
+  getSpiderManRealNameCell() {
+    return this.getSpiderManRowLocator().locator('td').nth(2);
+    //console.log("real name :", await realNameCell.evaluate(el => el.innerHTML));
+  }
 }
 
 module.exports = { DynamicTestingPage };
