@@ -1,4 +1,4 @@
-import { VerifyAccountPage } from './pages/verifyAccountPage';
+import { VerifyAccountPage } from '../../pages/verify-account/verifyAccountPage';
 import { test, expect } from 'playwright/test';
 
 test.describe('Verify Account test', () => {
