@@ -1,21 +1,23 @@
 import { expect, test } from '@playwright/test';
-
+import { PopUpPage } from '../../pages/popUpPage/popUpPage';
 test.describe('Test Pop Up', () => {
+  let popUpPage;
+
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://qaplayground.dev/apps/popup/#');
+    popUpPage = new PopUpPage(page);
+    await page.goto(popUpPage.url);
   });
 
   test('TC1: Verify pop up open correctly', async ({ page }) => {
     const [popup] = await Promise.all([
       page.waitForEvent('popup'),
-      page.locator('#login').click(),
+      popUpPage.clickLoginInput(),
     ]);
 
-    await expect(popup).toHaveURL('https://qaplayground.dev/apps/popup/popup');
-    await expect(popup.getByRole('button')).toBeInViewport();
-    await popup.locator('button').click();
-
-    await expect(page).toHaveURL('https://qaplayground.dev/apps/popup/#');
-    await expect(page.locator('#info')).toHaveText('Button Clicked');
+    await expect(popup).toHaveURL(popUpPage.urlPopUp);
+    await expect(popup.getByRole(popUpPage.roleButton)).toBeInViewport();
+    await popup.locator(popUpPage.roleButton).click();
+    await expect(page).toHaveURL(popUpPage.url);
+    await expect(popUpPage.info).toHaveText(popUpPage.infoButtonClicked);
   });
 });
