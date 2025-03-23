@@ -5,7 +5,7 @@ test.describe('Test tags-inputs-box', () => {
     await page.goto('https://qaplayground.dev/apps/tags-input-box/');
   });
 
-  test.skip('TC1: Verify the existence of the tag called node and javascript.', async ({
+  test('TC1: Verify the existence of the tag called node and javascript.', async ({
     page,
   }) => {
     await expect(page.locator('text="Tags"')).toBeVisible();
@@ -13,7 +13,7 @@ test.describe('Test tags-inputs-box', () => {
     await expect(page.locator('text=javascript')).toBeVisible();
   });
 
-  test.skip('TC2: Remove the tags called node and javascript.', async ({
+  test('TC2: Remove the tags called node and javascript.', async ({
     page,
   }) => {
     const tags = page.locator('.content >> li');
@@ -23,7 +23,7 @@ test.describe('Test tags-inputs-box', () => {
     await expect(tags).toHaveCount(0);
   });
 
-  test.skip('Add a new tag and delete it afterward', async ({ page }) => {
+  test('TC3: Add a new tag and delete it afterward', async ({ page }) => {
     const input = page.locator('input[type="text"]');
     await input.fill('new tag');
     await input.press('Enter');
