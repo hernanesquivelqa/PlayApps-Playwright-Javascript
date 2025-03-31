@@ -1,14 +1,18 @@
 const { test, expect } = require("@playwright/test");
-
+import { ContextMenuPage } from "../../pages/context-menu/contextMenuPage";
 test.describe("Context Menu", () => {
+  let contextMenuPage;
+
+  test.beforeEach(async({page})=>{
+    contextMenuPage = new ContextMenuPage(page);
+    await page.goto(contextMenuPage.url);
+  })
   test("Should click on each menu and sub-menu item", async ({ page }) => {
-    await page.goto("https://qaplayground.dev/apps/context-menu/");
-    await expect(page.locator('text="Open Right-Click Context Menu"')).toBeVisible();
+    await expect(contextMenuPage.rightClickLocator).toBeVisible();
 
-    const menuItems = ["Preview", "Get Link", "Rename", "Delete", "Settings"];
-    const subMenuItems = ["Twitter", "Instagram", "Dribble", "Telegram"];
-
-    const message = page.locator("#msg"); // html paragraph
+    const menuItems = contextMenuPage.menuItems;
+    const subMenuItems = contextMenuPage.subMenuItems;
+    const message = contextMenuPage.message; // html paragraph
 
     // Validate menu items
     for (let index = 0; index < menuItems.length; index++) {
