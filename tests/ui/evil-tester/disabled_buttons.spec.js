@@ -1,16 +1,16 @@
 import { test, expect } from '@playwright/test';
+import { DynamicButtonsPage } from '../../pages/evilt-tester/dynamicButtonsPage';
+
 test.describe('Testing disabled dynamic buttons', () => {
   test('TC1: Verify disabled button flow', async ({ page }) => {
-    await page.goto("https://testpages.eviltester.com/styled/dynamic-buttons-disabled.html");
+    const buttonsPage = new DynamicButtonsPage(page);
 
-    // Start clicking buttons in order
-    await page.locator("#button00").click();
-    await expect(page.locator("#buttonmessage")).toHaveText("Click Buttons In Order");
+    await buttonsPage.navigate();
+    await buttonsPage.button00.click();
 
-    await page.locator("#button01").click();
-    await page.locator("#button02").click();
-    await page.locator("#button03").click();
+    await expect(buttonsPage.message).toHaveText("Click Buttons In Order");
 
-    await expect(page.locator("#buttonmessage")).toHaveText("All Buttons Clicked");
+    await buttonsPage.clickButtonsInOrder();
+    await expect(buttonsPage.message).toHaveText("All Buttons Clicked");
   });
 });
